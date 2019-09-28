@@ -16,7 +16,9 @@ public class TankMovement : MonoBehaviour
     private Rigidbody m_Rigidbody;         
     private float m_MovementInputValue;    
     private float m_TurnInputValue;        
-    private float m_OriginalPitch;         
+    private float m_OriginalPitch;
+
+    //private GestureListener gestureListener;
 
 
     private void Awake()
@@ -45,6 +47,7 @@ public class TankMovement : MonoBehaviour
         m_TurnAxisName = "Horizontal" + m_PlayerNumber;
 
         m_OriginalPitch = m_MovementAudio.pitch;
+        //this.gestureListener = Camera.main.GetComponent<GestureListener>();
     }
     
 

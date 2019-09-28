@@ -20,6 +20,8 @@ public class TankShooting : MonoBehaviour
     private float m_ChargeSpeed;
     private bool m_Fired;
 
+    private GestureListener_0 gestureListener;
+
 
     private void OnEnable()
     {
@@ -33,15 +35,28 @@ public class TankShooting : MonoBehaviour
         this.m_FireButton = "Fire" + this.m_PlayerNumber;
 
         this.m_ChargeSpeed = (this.m_MaxLaunchForce - this.m_MinLaunchForce) / this.m_MaxChargeTime;
+
+        this.gestureListener = Camera.main.GetComponent<GestureListener_0>();
     }
 
 
     private void Update()
     {
+
+        //KinectManager kinectManager = KinectManager.Instance;
+        /*
+        if ((!kinectManager || !kinectManager.IsInitialized() || !kinectManager.IsUserDetected()))
+        {
+            //print("Kinect out");
+            return;
+        }
+        */
+
         // Track the current state of the fire button and make decisions based on the current launch force.
         // The slider should have a default value of the minimum launch force.
         this.m_AimSlider.value = this.m_MinLaunchForce;
 
+        /*
         // If the max force has been exceeded and the shell hasn't yet been launched...
         if (this.m_CurrentLaunchForce >= this.m_MaxLaunchForce && !this.m_Fired)
         {
@@ -74,6 +89,44 @@ public class TankShooting : MonoBehaviour
             // ... launch the shell.
             this.Fire();
         }
+        */
+        
+        // If the max force has been exceeded and the shell hasn't yet been launched...
+        if (this.m_CurrentLaunchForce >= this.m_MaxLaunchForce && !this.m_Fired)
+        {
+            // ... use the max force and launch the shell.
+            print("force to launch");
+            this.m_CurrentLaunchForce = this.m_MaxLaunchForce;
+            this.Fire();
+        }
+        /*
+        // Otherwise, if the fire button is being held and the shell hasn't been launched yet...
+        else if ((this.gestureListener.IsPushing() && this.m_PlayerNumber == this.gestureListener.GetUserIndex() + 1) && !this.m_Fired)
+        {
+            // Increment the launch force and update the slider.
+            this.m_CurrentLaunchForce += this.m_ChargeSpeed * Time.deltaTime;
+
+            this.m_AimSlider.value = this.m_CurrentLaunchForce;
+        }*/
+        // Otherwise, if the fire button is released and the shell hasn't been launched yet...
+        else if ((this.gestureListener.IsPush() && this.m_PlayerNumber == this.gestureListener.GetUserIndex() + 1) && !this.m_Fired)
+        {
+            print("launch");
+            this.Fire();
+        }
+        // Otherwise, reload
+        else if (this.m_Fired)
+        {
+            print("reload");
+            // ... reset the fired flag and reset the launch force.
+            this.m_Fired = false;
+            this.m_CurrentLaunchForce = this.m_MinLaunchForce;
+
+            // Change the clip to the charging clip and start it playing.
+            this.m_ShootingAudio.clip = this.m_ChargingClip;
+            this.m_ShootingAudio.Play();
+        }
+
     }
 
 
