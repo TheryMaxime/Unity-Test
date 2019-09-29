@@ -14,6 +14,7 @@ public class TankManager
 
     private TankMovement m_Movement;       
     private TankShooting m_Shooting;
+    private TankControl m_Control;
     private GameObject m_CanvasGameObject;
 
 
@@ -21,10 +22,12 @@ public class TankManager
     {
         m_Movement = m_Instance.GetComponent<TankMovement>();
         m_Shooting = m_Instance.GetComponent<TankShooting>();
+        m_Control = m_Instance.GetComponent<TankControl>();
         m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
 
         m_Movement.m_PlayerNumber = m_PlayerNumber;
         m_Shooting.m_PlayerNumber = m_PlayerNumber;
+        m_Control.m_UserId = m_PlayerNumber;
 
         m_ColoredPlayerText = "<color=#" + ColorUtility.ToHtmlStringRGB(m_PlayerColor) + ">PLAYER " + m_PlayerNumber + "</color>";
 

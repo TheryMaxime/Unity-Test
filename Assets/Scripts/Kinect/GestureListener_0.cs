@@ -6,8 +6,8 @@ public class GestureListener_0 : MonoBehaviour, KinectGestures.GestureListenerIn
 {
     ///
 
-    private bool push;
     private bool pushing;
+    private bool push;
 
     private int userIndex;
 
@@ -18,7 +18,7 @@ public class GestureListener_0 : MonoBehaviour, KinectGestures.GestureListenerIn
 
     public bool IsPush()
     {
-        if (this.push)
+        if (this.pushing)
         {
             this.push = false;
             this.pushing = false;
@@ -31,8 +31,6 @@ public class GestureListener_0 : MonoBehaviour, KinectGestures.GestureListenerIn
     {
         if (this.pushing)
         {
-            this.push = false;
-            this.pushing = true;
             return true;
         }
 
@@ -44,6 +42,7 @@ public class GestureListener_0 : MonoBehaviour, KinectGestures.GestureListenerIn
         // detect these user specific gestures
         KinectManager manager = KinectManager.Instance;
 
+        print(userIndex);
         manager.DetectGesture(userId, KinectGestures.Gestures.Push);
 
 
@@ -63,6 +62,7 @@ public class GestureListener_0 : MonoBehaviour, KinectGestures.GestureListenerIn
         if (gesture == KinectGestures.Gestures.Push)
         {
             this.pushing = true;
+            this.push = false;
         }
         
     }
@@ -75,6 +75,7 @@ public class GestureListener_0 : MonoBehaviour, KinectGestures.GestureListenerIn
         //print(sGestureText);
         if (gesture == KinectGestures.Gestures.Push)
         {
+            this.pushing = false;
             this.push = true;
         }
             

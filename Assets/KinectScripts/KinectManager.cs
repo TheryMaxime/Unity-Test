@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 
 
+
 public class KinectManager : MonoBehaviour
 {
 	public enum Smoothing : int { None, Default, Medium, Aggressive }
@@ -481,6 +482,7 @@ public class KinectManager : MonoBehaviour
 		gestureData.checkForGestures = new List<KinectGestures.Gestures>();
 		switch(gesture)
 		{
+            /*
 			case KinectGestures.Gestures.ZoomIn:
 				gestureData.checkForGestures.Add(KinectGestures.Gestures.ZoomOut);
 				gestureData.checkForGestures.Add(KinectGestures.Gestures.Wheel);			
@@ -495,7 +497,7 @@ public class KinectManager : MonoBehaviour
 				gestureData.checkForGestures.Add(KinectGestures.Gestures.ZoomIn);
 				gestureData.checkForGestures.Add(KinectGestures.Gestures.ZoomOut);			
 				break;
-			
+			*/
 //			case KinectGestures.Gestures.Jump:
 //				gestureData.checkForGestures.Add(KinectGestures.Gestures.Squat);
 //				break;
@@ -504,9 +506,9 @@ public class KinectManager : MonoBehaviour
 //				gestureData.checkForGestures.Add(KinectGestures.Gestures.Jump);
 //				break;
 //				
-//			case KinectGestures.Gestures.Push:
-//				gestureData.checkForGestures.Add(KinectGestures.Gestures.Pull);
-//				break;
+			case KinectGestures.Gestures.Push:
+				gestureData.checkForGestures.Add(KinectGestures.Gestures.Pull);
+				break;
 //				
 //			case KinectGestures.Gestures.Pull:
 //				gestureData.checkForGestures.Add(KinectGestures.Gestures.Push);

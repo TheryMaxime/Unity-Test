@@ -11,8 +11,8 @@ public class TankMovement : MonoBehaviour
     public float m_PitchRange = 0.2f;
 
     
-    private string m_MovementAxisName;     
-    private string m_TurnAxisName;         
+    //private string m_MovementAxisName;     
+    //private string m_TurnAxisName;         
     private Rigidbody m_Rigidbody;         
     private float m_MovementInputValue;    
     private float m_TurnInputValue;        
@@ -43,8 +43,8 @@ public class TankMovement : MonoBehaviour
 
     private void Start()
     {
-        m_MovementAxisName = "Vertical" + m_PlayerNumber;
-        m_TurnAxisName = "Horizontal" + m_PlayerNumber;
+        //m_MovementAxisName = "Vertical" + m_PlayerNumber;
+        //m_TurnAxisName = "Horizontal" + m_PlayerNumber;
 
         m_OriginalPitch = m_MovementAudio.pitch;
         //this.gestureListener = Camera.main.GetComponent<GestureListener>();
@@ -54,8 +54,8 @@ public class TankMovement : MonoBehaviour
     private void Update()
     {
         // Store the player's input and make sure the audio for the engine is playing.
-        this.m_MovementInputValue = Input.GetAxis(this.m_MovementAxisName);
-        this.m_TurnInputValue = Input.GetAxis(this.m_TurnAxisName);
+        //this.m_MovementInputValue = Input.GetAxis(this.m_MovementAxisName);
+        //this.m_TurnInputValue = Input.GetAxis(this.m_TurnAxisName);
 
         this.EngineAudio();
     }
@@ -120,5 +120,15 @@ public class TankMovement : MonoBehaviour
 
         // Apply this rotation to the rigidbody's rotation.
         this.m_Rigidbody.MoveRotation(this.m_Rigidbody.rotation * turnRotation);
+    }
+
+    public void changeTurnValue(float value)
+    {
+        this.m_TurnInputValue = value*2;
+    }
+
+    public void changeMovementValue(float value)
+    {
+        this.m_MovementInputValue = value * 2;
     }
 }
